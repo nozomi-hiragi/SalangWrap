@@ -1,6 +1,6 @@
-/**
+﻿/**
  * @file BridgeWin.h
- * @brief Windows�p�̂Ȃɂ��H
+ * @brief Windows用のなにか？
  * @author nozomi hiragi
  * @date 2019/04/05
  * Copyright (C) 2019 nozomi hiragi, Inc. All rights reserved.
@@ -9,6 +9,7 @@
 #ifndef BRIDGE_WIN_H
 #define BRIDGE_WIN_H
 
+#define UNICODE
 #include <Windows.h>
 #include <string>
 #include <thread>
@@ -18,7 +19,7 @@ private:
   HWND _hwnd;
   HINSTANCE _hinstance;
 
-  std::string _app_name;
+  std::wstring _app_name;
   long _window_width;
   long _window_height;
 
@@ -28,7 +29,7 @@ private:
   /**
    * Processing message
    */
-  LRESULT _processingMessage(UINT uMsg, WPARAM wParam, LPARAM lParam); 
+  LRESULT _processingMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
 
   /**
    * Window procedure
@@ -39,7 +40,7 @@ private:
     if (instance != nullptr) {
       return instance->_processingMessage(uMsg, wParam, lParam);
     }
-    
+
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
   }
 
@@ -49,7 +50,7 @@ public:
   /**
    * Constructor
    */
-  BridgeWin(const char* app_name, long width, long height) :
+  BridgeWin(const wchar_t* app_name, long width, long height) :
     _app_name(app_name),
     _window_width(width),
     _window_height(height),

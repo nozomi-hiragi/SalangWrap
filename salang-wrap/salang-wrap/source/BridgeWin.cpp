@@ -1,6 +1,6 @@
-/**
+ï»¿/**
  * @file BridgeWin.cpp
- * @brief Windows—p‚Ì‚È‚É‚©H
+ * @brief Windowsç”¨ã®ãªã«ã‹ï¼Ÿ
  * @author nozomi hiragi
  * @date 2019/04/05
  * Copyright (C) 2019 nozomi hiragi, Inc. All rights reserved.
@@ -19,15 +19,15 @@ LRESULT BridgeWin::_processingMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) {
   case WM_SIZE: {
     UINT width = LOWORD(lParam);
     UINT height = HIWORD(lParam);
-    // ƒrƒ…[ƒ|[ƒg•Ï‚¦‚é
+    // ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆå¤‰ãˆã‚‹
   } break;
 
   case WM_KEYDOWN: {
-    // ‚±‚±‚Å“ü—Í‚à‚ç‚Á‚Ä‘—‚é‚Á‚Ä•û–@‚à‚ ‚é‚ª....
+    // ã“ã“ã§å…¥åŠ›ã‚‚ã‚‰ã£ã¦é€ã‚‹ã£ã¦æ–¹æ³•ã‚‚ã‚ã‚‹ãŒ....
   } break;
 
   case WM_CLOSE: {
-    // ƒAƒvƒŠ‚ÉI‚í‚èˆ—‘—‚éH
+    // ã‚¢ãƒ—ãƒªã«çµ‚ã‚ã‚Šå‡¦ç†é€ã‚‹ï¼Ÿ
   }
 
   default:
@@ -43,7 +43,7 @@ LRESULT BridgeWin::_processingMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) {
  */
 void BridgeWin::createWindow() {
 
-  const std::string window_class_name(_app_name + "WindowClass");
+  const std::wstring window_class_name(_app_name + L"WindowClass");
   _hinstance = GetModuleHandle(nullptr);
 
   WNDCLASSEX window_class = {};

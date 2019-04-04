@@ -1,4 +1,4 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <string>
 #include <Windows.h>
 
@@ -7,7 +7,7 @@
 
 int main(int argc, char *argv[]) {
 
-  BridgeWin bridge("window", 1366, 768);
+  BridgeWin bridge(L"window", 1366, 768);
   bridge.startWindowThread();
 
   while (bridge.isExistWindowThread()) {
