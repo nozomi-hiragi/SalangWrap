@@ -8,11 +8,10 @@
 int main(int argc, char *argv[]) {
 
   BridgeWin bridge("window", 1366, 768);
-  bridge.createWindow();
+  bridge.startWindowThread();
 
-  while (!bridge.processSystemMessage()) {
-    // ‚±‚±‚ÉXVˆ—
+  while (bridge.isExistWindowThread()) {
+    // ã“ã“ã«æ›´æ–°å‡¦ç†
+    Sleep(1);
   }
-
-  bridge.destroyWindow();
 }

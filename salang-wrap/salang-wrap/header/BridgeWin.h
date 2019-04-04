@@ -11,6 +11,7 @@
 
 #include <Windows.h>
 #include <string>
+#include <thread>
 
 class BridgeWin {
 private:
@@ -20,6 +21,9 @@ private:
   std::string _app_name;
   long _window_width;
   long _window_height;
+
+  std::thread _window_thread;
+  bool _window_thread_end_flag;
 
   /**
    * Processing message
@@ -48,13 +52,17 @@ public:
   BridgeWin(const char* app_name, long width, long height) :
     _app_name(app_name),
     _window_width(width),
-    _window_height(height) {
+    _window_height(height),
+    _window_thread(),
+    _window_thread_end_flag(true) {
   }
 
   /**
    * Destructor
    */
-  ~BridgeWin() { destroyWindow(); }
+  ~BridgeWin() {
+    endWindowThread();
+  }
 
   /**
    * Create window
@@ -71,6 +79,20 @@ public:
    * return quit: true
    */
   bool processSystemMessage();
+
+  /**
+   * Start window thread
+   */
+  void startWindowThread();
+
+  /**
+   * End window thread
+   */
+  void endWindowThread();
+
+  bool isExistWindowThread() {
+    return !_window_thread_end_flag;
+  }
 };
 
 #endif BRIDGE_WIN_H

@@ -91,9 +91,42 @@ void BridgeWin::destroyWindow() {
 bool BridgeWin::processSystemMessage() {
   MSG msg;
   while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
-    if (msg.message == WM_QUIT) { return true; }
+    if (msg.message == WM_QUIT) {
+      return true;
+    }
     TranslateMessage(&msg);
     DispatchMessage(&msg);
   }
   return false;
+}
+
+/**
+ * Start window thread
+ */
+void BridgeWin::startWindowThread() {
+  if (_window_thread.joinable()) {
+    return;
+  }
+  _window_thread = std::thread([this]() {
+    _window_thread_end_flag = false;
+    createWindow();
+    while (!processSystemMessage()) {
+      if (_window_thread_end_flag) {
+        PostQuitMessage(0);
+      }
+      Sleep(1);
+    }
+    destroyWindow();
+    _window_thread_end_flag = true;
+  });
+}
+
+/**
+ * End window thread
+ */
+void BridgeWin::endWindowThread() {
+  if (_window_thread.joinable()) {
+    _window_thread_end_flag = true;
+    _window_thread.join();
+  }
 }
